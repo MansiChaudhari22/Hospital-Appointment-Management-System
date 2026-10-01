@@ -1,0 +1,122 @@
+
+@model CIE_2.Models.Doctor
+
+@{
+    ViewData["Title"] = "Doctor Details";
+}
+
+<style>
+    .details-page {
+        background: #f4f8fc;
+        min-height: 85vh;
+        padding: 55px 15px;
+    }
+
+    .details-card {
+        max-width: 750px;
+        margin: auto;
+        border: 0;
+        border-radius: 20px;
+        box-shadow: 0 8px 30px rgba(29, 66, 105, .10);
+        overflow: hidden;
+    }
+
+    .details-banner {
+        background: linear-gradient(120deg, #1765ad, #3c91d5);
+        color: white;
+        padding: 35px;
+        text-align: center;
+    }
+
+
+
+    .detail-item {
+        background: #f4f8fc;
+        border-radius: 12px;
+        padding: 17px;
+        height: 100%;
+    }
+
+    .detail-label {
+        color: #6b7d90;
+        font-size: 13px;
+    }
+
+    .detail-value {
+        color: #173b65;
+        font-weight: 700;
+        font-size: 18px;
+        margin-top: 5px;
+    }
+</style>
+
+<div class="details-page">
+    <div class="card details-card">
+        <div class="details-banner">
+            
+            <h2 class="fw-bold">@Model.DoctorName</h2>
+            <p class="mb-0">@Model.Specialization Specialist</p>
+        </div>
+
+        <div class="card-body p-4 p-md-5">
+            <h5 class="fw-bold mb-4" style="color:#173b65">
+                Professional Information
+            </h5>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="detail-item">
+                        <div class="detail-label">Doctor ID</div>
+                        <div class="detail-value">#@Model.DoctorId</div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="detail-item">
+                        <div class="detail-label">Specialization</div>
+                        <div class="detail-value">@Model.Specialization</div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="detail-item">
+                        <div class="detail-label">Experience</div>
+                        <div class="detail-value">@Model.Experience years</div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="detail-item">
+                        <div class="detail-label">Consultation Fee</div>
+                        <div class="detail-value">₹@Model.ConsultationFee</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 p-3 rounded-3"
+                 style="background:#eaf7f0">
+                <div class="text-secondary small">Total Consultation Charge</div>
+                <div class="fs-3 fw-bold" style="color:#16734a">
+                    ₹@ViewBag.TotalCharge
+                </div>
+                <small class="text-secondary">
+                    Includes the additional service charge.
+                </small>
+            </div>
+
+            <div class="d-flex flex-column flex-sm-row gap-2 mt-4">
+                <a asp-action="Appointment"
+                   asp-route-id="@Model.DoctorId"
+                   class="btn btn-primary px-4">
+                    <i class="bi bi-calendar-check me-2"></i>
+                    Book Appointment
+                </a>
+
+                <a asp-action="Index"
+                   class="btn btn-outline-secondary px-4">
+                    Back to Doctors
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

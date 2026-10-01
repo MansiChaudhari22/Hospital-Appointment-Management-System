@@ -1,0 +1,63 @@
+
+@* Set the model to a collection of Post objects. *@
+@model IEnumerable<CIE_2.Models.Post>
+
+@{
+    // Set the title displayed in the browser and layout.
+    ViewData["Title"] = "Posts";
+}
+
+@* Display the page heading. *@
+<h2 class="text-center mb-4">Posts from JSONPlaceholder</h2>
+
+@* Display an error message if the API request fails. *@
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+@* Create a responsive container for the posts table. *@
+<div class="table-responsive">
+
+    @* Create a Bootstrap-styled table. *@
+    <table class="table table-bordered table-striped table-hover">
+
+        @* Define the table heading. *@
+        <thead class="table-dark">
+            <tr>
+                @* Display the post ID column heading. *@
+                <th>Post ID</th>
+
+                @* Display the post title column heading. *@
+                <th>Title</th>
+            </tr>
+        </thead>
+
+        @* Display the retrieved posts. *@
+        <tbody>
+            @* Loop through every post in the model. *@
+            @foreach (var post in Model)
+            {
+                <tr>
+                    @* Display the ID of the current post. *@
+                    <td>@post.Id</td>
+
+                    @* Display the title of the current post. *@
+                    <td>@post.Title</td>
+                </tr>
+            }
+
+            @* Show a message if no posts were retrieved. *@
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="2" class="text-center">
+                        No posts available.
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

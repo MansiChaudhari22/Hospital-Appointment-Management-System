@@ -1,0 +1,128 @@
+
+@model IEnumerable<CIE_2.Models.Doctor>
+
+@{
+    ViewData["Title"] = "Our Doctors";
+}
+
+<style>
+    .doctor-page {
+        background: #f4f8fc;
+        min-height: 85vh;
+        padding: 40px 0;
+    }
+
+    .page-heading {
+        color: #173b65;
+        font-weight: 750;
+    }
+
+    .doctor-card {
+        border: 0;
+        border-radius: 18px;
+        overflow: hidden;
+        background: white;
+        box-shadow: 0 5px 22px rgba(29, 66, 105, .08);
+        transition: transform .25s, box-shadow .25s;
+        height: 100%;
+    }
+
+    .doctor-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 30px rgba(29, 66, 105, .15);
+    }
+
+    .doctor-avatar {
+        width: 76px;
+        height: 76px;
+        border-radius: 50%;
+        background: #e4f1ff;
+        color: #1765ad;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        margin: 0 auto 15px;
+    }
+
+    .specialty {
+        display: inline-block;
+        background: #eaf4ff;
+        color: #1765ad;
+        padding: 6px 13px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .fee {
+        color: #16734a;
+        font-size: 23px;
+        font-weight: 750;
+    }
+
+    .btn-primary {
+        background: #1765ad;
+        border-color: #1765ad;
+        border-radius: 9px;
+    }
+
+    .btn-outline-primary {
+        border-radius: 9px;
+    }
+</style>
+
+<div class="doctor-page">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="text-primary fw-semibold">OUR MEDICAL TEAM</span>
+            <h1 class="page-heading mt-2">Meet Our Doctors</h1>
+            <p class="text-secondary">
+                Experienced specialists dedicated to your health and well-being.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            @foreach (var doctor in Model)
+            {
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="doctor-card p-4 text-center">
+                    
+
+                        <h5 class="fw-bold mb-2">@doctor.DoctorName</h5>
+                        <span class="specialty">@doctor.Specialization</span>
+
+                        <div class="text-secondary small mt-3">
+                            <i class="bi bi-briefcase me-1"></i>
+                            @doctor.Experience years experience
+                        </div>
+
+                        <hr class="my-4" />
+
+                        <div class="text-secondary small">Consultation Fee</div>
+                        <div class="fee mb-3">
+                            ₹@doctor.ConsultationFee
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <a asp-controller="Doctor"
+                               asp-action="Details"
+                               asp-route-id="@doctor.DoctorId"
+                               class="btn btn-outline-primary">
+                                View Details
+                            </a>
+
+                            <a asp-controller="Doctor"
+                               asp-action="Appointment"
+                               asp-route-id="@doctor.DoctorId"
+                               class="btn btn-primary">
+                                Book Appointment
+                                <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

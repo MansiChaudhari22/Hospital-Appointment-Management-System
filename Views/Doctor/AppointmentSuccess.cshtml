@@ -1,0 +1,58 @@
+
+@model CIE_2.Models.Appointment
+
+@{
+    ViewData["Title"] = "Appointment Request";
+    var doctor = ViewBag.Doctor as CIE_2.Models.Doctor;
+}
+
+<div class="container py-5" style="min-height:75vh">
+    <div class="card border-0 shadow-sm rounded-4 mx-auto text-center p-4 p-md-5"
+         style="max-width:600px">
+        <div class="mx-auto rounded-circle d-flex align-items-center
+                    justify-content-center mb-4"
+             style="width:85px;height:85px;background:#e5f7ed;color:#198754;font-size:42px">
+            <i class="bi bi-check-lg"></i>
+        </div>
+
+        <h2 class="fw-bold mb-2" style="color:#173b65">
+            Request Submitted!
+        </h2>
+
+        <p class="text-secondary mb-4">
+            @ViewBag.Message
+        </p>
+
+        <div class="text-start rounded-3 p-3 mb-4"
+             style="background:#f4f8fc">
+            <div class="mb-2">
+                <span class="text-secondary">Patient:</span>
+                <strong>@Model.PatientName</strong>
+            </div>
+
+            @if (doctor != null)
+            {
+                <div class="mb-2">
+                    <span class="text-secondary">Doctor:</span>
+                    <strong>@doctor.DoctorName</strong>
+                </div>
+            }
+
+            <div>
+                <span class="text-secondary">Specialization:</span>
+                <strong>@ViewBag.Specialization</strong>
+            </div>
+        </div>
+
+        <p class="small text-secondary">
+            This is a request confirmation for the practical demo.
+            No appointment has been saved to a database.
+        </p>
+
+        <a asp-controller="Doctor"
+           asp-action="Index"
+           class="btn btn-primary px-4 py-2">
+            Back to Doctors
+        </a>
+    </div>
+</div>

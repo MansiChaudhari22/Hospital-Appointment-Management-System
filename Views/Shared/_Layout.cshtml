@@ -1,0 +1,121 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @* Set the page character encoding. *@
+    <meta charset="utf-8" />
+
+    @* Make the page responsive on different devices. *@
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    @* Set the page title dynamically. *@
+    <title>@ViewData["Title"] - CIE_2</title>
+
+    @* Load Bootstrap styles. *@
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    @* Load the application's custom styles. *@
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+
+    @* Load generated Razor view styles. *@
+    <link rel="stylesheet"
+          href="~/CIE_2.styles.css"
+          asp-append-version="true" />
+</head>
+
+<body>
+    @* Create the navigation header. *@
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom mb-3">
+            <div class="container-fluid">
+
+                @* Link the application name to the home page. *@
+                <a class="navbar-brand"
+                   asp-controller="Home"
+                   asp-action="Index">
+                    Hospital Appointment System
+                </a>
+
+                @* Create the responsive navigation toggle. *@
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                @* Define the navigation links. *@
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav me-auto">
+
+                        @* Link to the home page. *@
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Home"
+                               asp-action="Index">
+                                Home
+                            </a>
+                        </li>
+
+                        @* Link to the doctor list. *@
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Doctor"
+                               asp-action="Index">
+                                Doctors
+                            </a>
+                        </li>
+
+                        @* Link to the asynchronous posts page. *@
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Home"
+                               asp-action="Posts">
+                                Posts
+                            </a>
+                        </li>
+
+                        @* Link to the privacy page. *@
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Home"
+                               asp-action="Privacy">
+                                Privacy
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    @* Render the content of the selected view. *@
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    @* Define the footer. *@
+    <footer class="border-top footer text-muted mt-4">
+        <div class="container">
+            &copy; 2026 - Hospital Appointment System
+        </div>
+    </footer>
+
+    @* Load jQuery. *@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    @* Load Bootstrap JavaScript. *@
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @* Load custom application JavaScript. *@
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @* Render scripts defined by individual views. *@
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

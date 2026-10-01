@@ -1,0 +1,138 @@
+
+@model CIE_2.Models.Appointment
+
+@{
+    ViewData["Title"] = "Book Appointment";
+    var doctor = ViewBag.Doctor as CIE_2.Models.Doctor;
+}
+
+<style>
+    .appointment-wrapper {
+        min-height: 75vh;
+        background: #f5f8fc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 15px;
+    }
+
+    .appointment-card {
+        width: 100%;
+        max-width: 480px;
+        background: white;
+        border: none;
+        border-radius: 14px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .appointment-title {
+        color: #174a78;
+        font-weight: 700;
+    }
+
+    .form-label {
+        color: #34495e;
+        font-weight: 600;
+    }
+
+    .form-control {
+        padding: 11px 13px;
+        border-radius: 8px;
+        border: 1px solid #d8e1eb;
+    }
+
+    .form-control:focus {
+        border-color: #2878bd;
+        box-shadow: 0 0 0 3px rgba(40, 120, 189, 0.1);
+    }
+
+    .doctor-name {
+        background: #f0f6fc;
+        border: 1px solid #e0ebf5;
+        border-radius: 8px;
+        padding: 11px 13px;
+        color: #174a78;
+        font-weight: 600;
+    }
+
+    .submit-btn {
+        background: #1765ad;
+        border: none;
+        border-radius: 8px;
+        padding: 11px;
+        font-weight: 600;
+    }
+
+    .submit-btn:hover {
+        background: #10518e;
+    }
+</style>
+
+<div class="appointment-wrapper">
+    <div class="card appointment-card">
+        <div class="card-body p-4 p-md-5">
+            <div class="text-center mb-4">
+                <div class="mb-3"
+                     style="font-size: 32px; color: #1765ad;">
+                    <i class="bi bi-calendar-check"></i>
+                </div>
+                <h3 class="appointment-title">Book Appointment</h3>
+                <p class="text-secondary small">
+                    Enter your details to schedule a visit.
+                </p>
+            </div>
+
+            <form asp-action="Appointment" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="DoctorId" />
+
+                <div asp-validation-summary="ModelOnly"
+                     class="text-danger small mb-3"></div>
+
+                <div class="mb-3">
+                    <label asp-for="PatientName"
+                           class="form-label">Patient Name</label>
+                    <input asp-for="PatientName"
+                           class="form-control"
+                           placeholder="Enter your full name" />
+                    <span asp-validation-for="PatientName"
+                          class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Doctor Name</label>
+                    <div class="doctor-name">
+                        @(doctor?.DoctorName ?? "Doctor not selected")
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="AppointmentDate"
+                           class="form-label">Appointment Date</label>
+                    <input type="date"
+                           id="AppointmentDate"
+                           name="AppointmentDate"
+                           class="form-control"
+                           min="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                </div>
+
+                <button type="submit"
+                        class="btn btn-primary submit-btn w-100">
+                    Confirm Appointment
+                </button>
+
+                <div class="text-center mt-3">
+                    <a asp-action="Index"
+                       class="text-decoration-none small"
+                       style="color: #1765ad;">
+                        Back to Doctors
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
